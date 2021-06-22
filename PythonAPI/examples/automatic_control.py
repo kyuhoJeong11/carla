@@ -22,6 +22,10 @@ import re
 import sys
 import weakref
 
+from behavior_agent import BehaviorAgent  # pylint: disable=import-error
+from roaming_agent import RoamingAgent  # pylint: disable=import-error
+from basic_agent import BasicAgent  # pylint: disable=import-error
+
 try:
     import pygame
     from pygame.locals import KMOD_CTRL
@@ -57,10 +61,6 @@ except IndexError:
 
 import carla
 from carla import ColorConverter as cc
-
-from agents.navigation.behavior_agent import BehaviorAgent  # pylint: disable=import-error
-from agents.navigation.roaming_agent import RoamingAgent  # pylint: disable=import-error
-from agents.navigation.basic_agent import BasicAgent  # pylint: disable=import-error
 
 
 # ==============================================================================
@@ -148,6 +148,7 @@ class World(object):
             spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
             self.player = self.world.try_spawn_actor(blueprint, spawn_point)
         # Set up the sensors.
+        '''
         self.collision_sensor = CollisionSensor(self.player, self.hud)
         self.lane_invasion_sensor = LaneInvasionSensor(self.player, self.hud)
         self.gnss_sensor = GnssSensor(self.player)
@@ -156,6 +157,7 @@ class World(object):
         self.camera_manager.set_sensor(cam_index, notify=False)
         actor_type = get_actor_display_name(self.player)
         self.hud.notification(actor_type)
+        '''
 
     def next_weather(self, reverse=False):
         """Get next weather setting"""
@@ -171,22 +173,24 @@ class World(object):
 
     def render(self, display):
         """Render world"""
-        self.camera_manager.render(display)
-        self.hud.render(display)
+        #self.camera_manager.render(display)
+        #self.hud.render(display)
 
+    '''
     def destroy_sensors(self):
         """Destroy sensors"""
         self.camera_manager.sensor.destroy()
         self.camera_manager.sensor = None
         self.camera_manager.index = None
+    '''
 
     def destroy(self):
         """Destroys all actors"""
         actors = [
-            self.camera_manager.sensor,
-            self.collision_sensor.sensor,
-            self.lane_invasion_sensor.sensor,
-            self.gnss_sensor.sensor,
+            #self.camera_manager.sensor,
+            #self.collision_sensor.sensor,
+            #self.lane_invasion_sensor.sensor,
+            #self.gnss_sensor.sensor,
             self.player]
         for actor in actors:
             if actor is not None:
@@ -261,10 +265,10 @@ class HUD(object):
         heading += 'S' if abs(transform.rotation.yaw) > 90.5 else ''
         heading += 'E' if 179.5 > transform.rotation.yaw > 0.5 else ''
         heading += 'W' if -0.5 > transform.rotation.yaw > -179.5 else ''
-        colhist = world.collision_sensor.get_collision_history()
-        collision = [colhist[x + self.frame - 200] for x in range(0, 200)]
-        max_col = max(1.0, max(collision))
-        collision = [x / max_col for x in collision]
+        #colhist = world.collision_sensor.get_collision_history()
+        #collision = [colhist[x + self.frame - 200] for x in range(0, 200)]
+        #max_col = max(1.0, max(collision))
+        #collision = [x / max_col for x in collision]
         vehicles = world.world.get_actors().filter('vehicle.*')
 
         self._info_text = [
@@ -278,7 +282,7 @@ class HUD(object):
             'Speed:   % 15.0f km/h' % (3.6 * math.sqrt(vel.x**2 + vel.y**2 + vel.z**2)),
             u'Heading:% 16.0f\N{DEGREE SIGN} % 2s' % (transform.rotation.yaw, heading),
             'Location:% 20s' % ('(% 5.1f, % 5.1f)' % (transform.location.x, transform.location.y)),
-            'GNSS:% 24s' % ('(% 2.6f, % 3.6f)' % (world.gnss_sensor.lat, world.gnss_sensor.lon)),
+            #'GNSS:% 24s' % ('(% 2.6f, % 3.6f)' % (world.gnss_sensor.lat, world.gnss_sensor.lon)),
             'Height:  % 18.0f m' % transform.location.z,
             '']
         if isinstance(control, carla.VehicleControl):
@@ -295,10 +299,10 @@ class HUD(object):
                 ('Speed:', control.speed, 0.0, 5.556),
                 ('Jump:', control.jump)]
         self._info_text += [
-            '',
-            'Collision:',
-            collision,
-            '',
+            #'',
+            #'Collision:',
+            #collision,
+            #'',
             'Number of vehicles: % 8d' % len(vehicles)]
 
         if len(vehicles) > 1:

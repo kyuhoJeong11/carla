@@ -241,7 +241,9 @@ class World(object):
                 print('Please add some Vehicle Spawn Point to your UE4 scene.')
                 sys.exit(1)
             spawn_points = self.map.get_spawn_points()
-            spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
+            #spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()            
+            spawn_point = spawn_points[3]
+            
             self.player = self.world.try_spawn_actor(blueprint, spawn_point)
             self.modify_vehicle_physics(self.player)
         # Set up the sensors.
@@ -288,6 +290,7 @@ class World(object):
         physics_control = vehicle.get_physics_control()
         physics_control.use_sweep_wheel_collision = True
         vehicle.apply_physics_control(physics_control)
+        #vehicle.apply_control(carla.VehicleControl(fl=100.0, fr=100.0, bl=100.0, br=100.0))
 
     def tick(self, clock):
         self.hud.tick(self, clock)
@@ -1083,7 +1086,7 @@ def game_loop(args):
 
     try:
         client = carla.Client(args.host, args.port)
-        client.set_timeout(2.0)
+        client.set_timeout(20.0)
 
         display = pygame.display.set_mode(
             (args.width, args.height),
@@ -1131,7 +1134,8 @@ def main():
     argparser.add_argument(
         '--host',
         metavar='H',
-        default='127.0.0.1',
+        default='localhost',
+        #default='192.168.80.55',
         help='IP of the host server (default: 127.0.0.1)')
     argparser.add_argument(
         '-p', '--port',

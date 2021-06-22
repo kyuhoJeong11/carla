@@ -1,5 +1,70 @@
 CARLA Simulator
 ===============
+2021/06/02
+
+LeftDrive 폴더 내의 파일 추가.
+
+변경된 파일 적용 방법은 LeftDrive 폴더 내부의 txt파일을 확인하시면 됩니다.
+
+===============
+2021/05/28
+
+LeftDrive 폴더 추가.
+
+해당 폴더를 LibCarla\source\carla\road 폴더에서 덮어쓰기 한 뒤,
+
+make PythonAPI -> make launch 명령어를 사용하시면 적용됩니다.
+
+map은 좌측통행용 map을 사용하셔야 waypoint가 정상적으로 생성됩니다.
+
+좌측통행에서 신호등을 사용하신다면, Carla 시뮬레이션 실행 이후 콘텐츠 브라우저에서 
+
+Carla\Blueprints\TrafficLight\BP_TLOpenDrive에서 디테일 항목의 Default->Heads->0->Position에서
+
+회전 항목의 Yaw값을 180.0으로 설정하시면 됩니다.
+
+===============
+
+PythonAPI/examples 폴더에 테스트를 진행하며 실행하였던 파이썬 파일들이 존재합니다.
+
+해당 경로의 tutorial.py 를 제외한 모든 tutorial이 붙은 파일들은 테스트를 진행하였던 파일들입니다.
+
+파일 내부 주석을 참고하여 사용하시면 됩니다.
+
+
+===============
+Unreal Engine 자체의 크기가 매우 크기 때문에 파일 전체를 commit하지는 못하였습니다.
+대신 수정된 파일들을 Carla 폴더 내부의 UnrealEngine-Revision 폴더로 옮겨서 commit하였습니다.
+해당 파일들을 아래의 경로를 참고하여 덮어쓰기 해주시길 바랍니다.
+
+
+SetEngineRotationSpeed 함수의 경우 WheeledVehicleMovementComponent.cpp 파일에 존재하고 있습니다.
+
+해당 파일의 경로는
+C:\Projects\UE4\UnrealEngine\Engine\Plugins\Runtime\PhysXVehicles\Source\PhysXVehicles\Private이며,
+
+헤더 파일은
+C:\Projects\UE4\UnrealEngine\Engine\Plugins\Runtime\PhysXVehicles\Source\PhysXVehicles\Public 위치에 존재하고 있습니다.
+
+
+
+SetWheelRotation 함수의 경우 
+C:\Projects\UE4\UnrealEngine\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Source\PhysXVehicle\src의 PxVehicleWheels.cpp 파일에 존재하고 있으며,
+
+해당 cpp파일의 헤더 파일은
+C:\Projects\UE4\UnrealEngine\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\vehicle 위치에 존재하고 있습니다.
+
+SetWheelRotation 함수는 추가한 코드가 아니라, 원래 존재하던 코드를 가져와서 사용한 것이기 때문에 덮어쓰기 하지 않으셔도 됩니다.
+
+
+C:\Projects\UE4\UnrealEngine는
+https://carla.readthedocs.io/en/0.9.11/build_windows/
+carla 공식 documents의 build 방법에 나와있는 UE4 엔진 설치 위치이기 때문에
+
+해당 UE4 엔진을 설치한 위치로 변경해주시면 됩니다.
+
+
+===============
 
 [![Build Status](https://travis-ci.org/carla-simulator/carla.svg?branch=master)](https://travis-ci.org/carla-simulator/carla)
 [![Documentation](https://readthedocs.org/projects/carla/badge/?version=latest)](http://carla.readthedocs.io)
