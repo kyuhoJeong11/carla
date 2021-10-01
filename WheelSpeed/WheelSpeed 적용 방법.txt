@@ -1,0 +1,10 @@
+LibCarla.zip 파일을 압축 해제하신 뒤, Carla 폴더 내부의 LibCarla 폴더에 덮어쓰기 해주시면 됩니다.
+
+Control.cpp 파일은 carla 폴더 내부의 PythonAPI\carla\source\libcarla 경로에 있는 control.cpp 파일에 덮어쓰기 해주시면 됩니다.
+
+VehicleControl.h 파일은 carla 폴더 내부의 Unreal\CarlaUE4\Plugins\Carla\Source\Carla\Vehicle 경로에 있는 VehicleControl.h 파일에 덮어쓰기 해주시면 됩니다.
+
+CarlaWheeledVehicle.cpp 파일은 carla 폴더 내부의 Unreal\CarlaUE4\Plugins\Carla\Source\Carla\Vehicle 에서 덮어쓰기 해주시면 됩니다. 
+
+이후 terminal에서 make LibCarla, make PythonAPI, make launch를 진행해주시면 됩니다.
+

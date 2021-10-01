@@ -1,5 +1,13 @@
 CARLA Simulator
 ===============
+2021/10/01
+WheelSpeed 폴더 추가.
+LeftDrive 폴더 내의 cpp, h 파일 변경.
+실험을 진행하였던 Python 코드 추가.
+
+파일 적용 방법은 폴더 내부의 txt파일을 확인하시면 됩니다.
+
+===============
 2021/06/02
 
 LeftDrive 폴더 내의 파일 추가.
@@ -16,12 +24,6 @@ LeftDrive 폴더 추가.
 make PythonAPI -> make launch 명령어를 사용하시면 적용됩니다.
 
 map은 좌측통행용 map을 사용하셔야 waypoint가 정상적으로 생성됩니다.
-
-좌측통행에서 신호등을 사용하신다면, Carla 시뮬레이션 실행 이후 콘텐츠 브라우저에서 
-
-Carla\Blueprints\TrafficLight\BP_TLOpenDrive에서 디테일 항목의 Default->Heads->0->Position에서
-
-회전 항목의 Yaw값을 180.0으로 설정하시면 됩니다.
 
 ===============
 

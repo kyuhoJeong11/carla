@@ -753,8 +753,7 @@ namespace road {
       }
     }
   }
-
-  /*
+  
   geom::Transform MapBuilder::ComputeSignalTransform(std::unique_ptr<Signal> &signal, MapData &data) {
     DirectedPoint point = data.GetRoad(signal->_road_id).GetDirectedPointInNoLaneOffset(signal->_s);
     point.ApplyLateralOffset(static_cast<float>(-signal->_t));
@@ -765,19 +764,6 @@ namespace road {
         geom::Math::ToDegrees(static_cast<float>(-(point.tangent + signal->_hOffset))),
         geom::Math::ToDegrees(static_cast<float>(signal->_roll))));
     return transform;
-  }
-  */
-
-  geom::Transform MapBuilder::ComputeSignalTransform(std::unique_ptr<Signal> &signal, MapData &data) {
-	  DirectedPoint point = data.GetRoad(signal->_road_id).GetDirectedPointInNoLaneOffset(signal->_s);
-	  point.ApplyLateralOffset(static_cast<float>(signal->_t));
-	  point.location.y *= -1; // Unreal Y axis hack
-	  point.location.z += static_cast<float>(-signal->_zOffset);
-	  geom::Transform transform(point.location, geom::Rotation(
-		  geom::Math::ToDegrees(static_cast<float>(-signal->_pitch)),
-		  geom::Math::ToDegrees(static_cast<float>(-(point.tangent + signal->_hOffset))),
-		  geom::Math::ToDegrees(static_cast<float>(-signal->_roll))));
-	  return transform;
   }
 
   void MapBuilder::SolveSignalReferencesAndTransforms() {

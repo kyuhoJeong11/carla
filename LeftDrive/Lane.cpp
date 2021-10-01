@@ -22,7 +22,7 @@
 namespace carla {
 namespace road {
 
-  static int lane_cnt = 0;
+  int lane_cnt = 0;
   static bool flag = true;
 
   const LaneSection *Lane::GetLaneSection() const {
@@ -44,10 +44,6 @@ namespace road {
 
   bool Lane::GetLevel() const {
     return _level;
-  }
-
-  int Lane::GetCnt() {
-    return lane_cnt;
   }
 
   double Lane::GetDistance() const {

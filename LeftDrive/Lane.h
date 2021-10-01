@@ -75,8 +75,6 @@ namespace road {
 
     bool GetLevel() const;
 
-    int GetCnt();
-
     template <typename T>
     const T *GetInfo(const double s) const {
       DEBUG_ASSERT(_lane_section != nullptr);
