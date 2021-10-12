@@ -9,10 +9,12 @@ CARLA Simulator
 해당 현상과는 관계 없이 autopilot, global route planner는 정상적으로 좌측통행으로 진행되는 것을 확인하였음.
 
 해당 코드 적용 방법은 LeftDrive_global_route_planner 폴더 내의 txt파일 참조.
+
 ==============
 2021/10/05
 
 1차선 우측 / 좌측 통행 Roadrunner Map 추가 업로드.
+
 ===============
 2021/10/01
 
