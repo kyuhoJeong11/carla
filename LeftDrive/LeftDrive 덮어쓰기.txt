@@ -1,5 +1,5 @@
 4개의 CPP 파일은 LibCarla\source\carla\road 폴더 안의 CPP 파일에 덮어쓰기 하시면 됩니다.
 
-이후 make LibCarla, make PythonAPI, make launch 명령어를 순서대로 실행해주시면 됩니다. 
+이후 make clean, make LibCarla, make PythonAPI, make launch 명령어를 순서대로 실행해주시면 됩니다. 
 
 Map을 import 할 때에는 좌측 통행 전용으로 만들어진 Map을 import 해야 합니다.

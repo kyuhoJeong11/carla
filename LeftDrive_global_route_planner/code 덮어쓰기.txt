@@ -1,0 +1,9 @@
+road 폴더 내부의 파일들은 carla 폴더에서
+
+LibCarla\source\carla\road 경로 내의 파일들을 덮어씌워주면 됩니다.
+
+
+
+client 폴더 내부의 파일들은 carla 폴더에서
+
+LibCarla\source\carla\client 경로 내의 파일들을 덮어씌워주면 됩니다.

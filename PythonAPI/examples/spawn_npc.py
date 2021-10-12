@@ -78,6 +78,7 @@ def main():
     argparser.add_argument(
         '--sync',
         action='store_true',
+        default=True,
         help='Synchronous mode execution')
     argparser.add_argument(
         '--hybrid',
