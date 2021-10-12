@@ -7,3 +7,6 @@ LibCarla\source\carla\road 경로 내의 파일들을 덮어씌워주면 됩니�
 client 폴더 내부의 파일들은 carla 폴더에서
 
 LibCarla\source\carla\client 경로 내의 파일들을 덮어씌워주면 됩니다.
+
+
+이후 make clean, make LibCarla, make PythonAPI, make launch 명령어를 순서대로 입력해주시면 됩니다.
