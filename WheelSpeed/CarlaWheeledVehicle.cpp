@@ -230,12 +230,16 @@ void ACarlaWheeledVehicle::FlushVehicleControl()
   #endif
   {
     auto *MovementComponent = GetVehicleMovementComponent();
-    
+	/*
+	// 1. 모든 바퀴가 0일 경우에 code 추가해보기
 	if (InputControl.Control.FLWheelSpeed != 0 || InputControl.Control.FRWheelSpeed != 0 || InputControl.Control.BLWheelSpeed != 0 || InputControl.Control.BRWheelSpeed != 0)
 	{
 		MovementComponent->SetEngineRotationSpeed(InputControl.Control.FLWheelSpeed, InputControl.Control.FRWheelSpeed, InputControl.Control.BLWheelSpeed, InputControl.Control.BRWheelSpeed);
 	}
+	*/
+	MovementComponent->SetEngineRotationSpeed(InputControl.Control.FLWheelSpeed, InputControl.Control.FRWheelSpeed, InputControl.Control.BLWheelSpeed, InputControl.Control.BRWheelSpeed);
 
+	// 2. Throttle 주석으로 바꿔보기
     MovementComponent->SetThrottleInput(InputControl.Control.Throttle);
     MovementComponent->SetSteeringInput(InputControl.Control.Steer);
     MovementComponent->SetBrakeInput(InputControl.Control.Brake);
