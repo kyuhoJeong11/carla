@@ -411,7 +411,7 @@ public:
 
 	/** Set current engine's rotation speed */
 	UFUNCTION(BlueprintCallable, Category="Game|Components|WheeledVehicleMovement")
-	void SetEngineRotationSpeed(float Speed1, float Speed2, float Speed3, float Speed4) const;
+	void SetWheelSpeed(float Speed1, float Speed2, float Speed3, float Speed4) const;
 
 	/** How fast the vehicle is moving forward */
 	UFUNCTION(BlueprintCallable, Category="Game|Components|WheeledVehicleMovement")

@@ -312,6 +312,15 @@ void UWheeledVehicleMovementComponent::SetupVehicleShapes()
 						MeshScaleV.X = Wheel->ShapeRadius / MeshBounds.BoxExtent.X;
 						MeshScaleV.Y = Wheel->ShapeWidth / MeshBounds.BoxExtent.Y;
 						MeshScaleV.Z = Wheel->ShapeRadius / MeshBounds.BoxExtent.Z;
+
+						/*
+						if (MeshScaleV.X < 0.1 || MeshScaleV.Y < 0.1 || MeshScaleV.Z < 0.1) 
+						{
+							MeshScaleV.X *= 2;
+							MeshScaleV.Y *= 2;
+							MeshScaleV.Z *= 2;
+						}
+						*/
 					}
 				}
 
@@ -1109,6 +1118,7 @@ void UWheeledVehicleMovementComponent::UpdateState(float DeltaTime)
 			UpdateAvoidance(DeltaTime);
 		}
 
+		// 현재 RPM 값이 null.
 		RPMInput = RPMInputRate.InterpInputValue(DeltaTime, RPMInput, CalcRPMInput());
 		SteeringInput = SteeringInputRate.InterpInputValue(DeltaTime, SteeringInput, CalcSteeringInput());
 		ThrottleInput = ThrottleInputRate.InterpInputValue(DeltaTime, ThrottleInput, CalcThrottleInput());
@@ -1321,7 +1331,7 @@ void UWheeledVehicleMovementComponent::ClearRawInput()
 
 void UWheeledVehicleMovementComponent::SetRPMInput(float RPM)
 {
-	RawThrottleInput = RPM;
+	RawRPMInput = RPM;
 }
 
 void UWheeledVehicleMovementComponent::SetThrottleInput(float Throttle)
@@ -1402,7 +1412,7 @@ float UWheeledVehicleMovementComponent::GetForwardSpeed() const
 	return ForwardSpeed;
 }
 
-void UWheeledVehicleMovementComponent::SetEngineRotationSpeed(float Speed1, float Speed2, float Speed3, float Speed4) const
+void UWheeledVehicleMovementComponent::SetWheelSpeed(float Speed1, float Speed2, float Speed3, float Speed4) const
 {
 	PVehicle->mWheelsDynData.setWheelRotationSpeed(0, Speed1);
 	PVehicle->mWheelsDynData.setWheelRotationSpeed(1, Speed2);
@@ -1415,7 +1425,6 @@ float UWheeledVehicleMovementComponent::GetEngineRotationSpeed() const
 #if WITH_PHYSX_VEHICLES
 	if (PVehicleDrive)
 	{
-		// Spawn_npc.py 에서 불림.
 		UE_LOG(LogVehicles, Warning, TEXT("PVehicleDrive"));
 		return 9.5493 *  PVehicleDrive->mDriveDynData.getEngineRotationSpeed(); // 9.5493 = 60sec/min * (Motor Omega)/(2 * Pi); Motor Omega is in radians/sec, not RPM.
 	}
