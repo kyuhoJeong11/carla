@@ -27,11 +27,7 @@ namespace rpc {
         bool in_hand_brake,
         bool in_reverse,
         bool in_manual_gear_shift,
-        int32_t in_gear,
-        float in_fl = 0.0f,
-        float in_fr = 0.0f,
-        float in_bl = 0.0f,
-        float in_br = 0.0f)
+        int32_t in_gear)
       : throttle(in_throttle),
         steer(in_steer),
         brake(in_brake),
@@ -39,10 +35,46 @@ namespace rpc {
         reverse(in_reverse),
         manual_gear_shift(in_manual_gear_shift),
         gear(in_gear),
-        fl(in_fl),
-        fr(in_fr),
-        bl(in_bl),
-        br(in_br) {}
+        throttle_fl(0.0f),
+        throttle_fr(0.0f),
+        throttle_bl(0.0f),
+        throttle_br(0.0f), 
+        brake_fl(0.0f),
+        brake_fr(0.0f),
+        brake_bl(0.0f),
+        brake_br(0.0f)  {}
+
+    VehicleControl(
+        float in_throttle,
+        float in_steer,
+        float in_brake,
+        bool in_hand_brake,
+        bool in_reverse,
+        bool in_manual_gear_shift,
+        int32_t in_gear,
+        float in_throttle_fl,
+        float in_throttle_fr,
+        float in_throttle_bl,
+        float in_throttle_br,
+        float in_brake_fl,
+        float in_brake_fr,
+        float in_brake_bl,
+        float in_brake_br)
+      : throttle(in_throttle),
+        steer(in_steer),
+        brake(in_brake),
+        hand_brake(in_hand_brake),
+        reverse(in_reverse),
+        manual_gear_shift(in_manual_gear_shift),
+        gear(in_gear),
+        throttle_fl(in_throttle_fl),
+        throttle_fr(in_throttle_fr),
+        throttle_bl(in_throttle_bl),
+        throttle_br(in_throttle_br), 
+        brake_fl(in_brake_fl),
+        brake_fr(in_brake_fr),
+        brake_bl(in_brake_bl),
+        brake_br(in_brake_br)  {}
 
     float throttle = 0.0f;
     float steer = 0.0f;
@@ -51,11 +83,15 @@ namespace rpc {
     bool reverse = false;
     bool manual_gear_shift = false;
     int32_t gear = 0;
+    float throttle_fl = 0.0f;
+    float throttle_fr = 0.0f;
+    float throttle_bl = 0.0f;
+    float throttle_br = 0.0f;
+    float brake_fl = 0.0f;
+    float brake_fr = 0.0f;
+    float brake_bl = 0.0f;
+    float brake_br = 0.0f;
 
-    float fl = 0.0f;
-    float fr = 0.0f;
-    float bl = 0.0f;
-    float br = 0.0f;
 
 #ifdef LIBCARLA_INCLUDED_FROM_UE4
 
@@ -67,10 +103,14 @@ namespace rpc {
         reverse(Control.bReverse),
         manual_gear_shift(Control.bManualGearShift),
         gear(Control.Gear),
-        fl(Control.FLWheelSpeed),
-        fr(Control.FRWheelSpeed),
-        bl(Control.BLWheelSpeed),
-        br(Control.BRWheelSpeed) {}
+        throttle_fl(Control.ThrottleFL),
+        throttle_fr(Control.ThrottleFR),
+        throttle_bl(Control.ThrottleBL),
+        throttle_br(Control.ThrottleBR), 
+        brake_fl(Control.BrakeFL),
+        brake_fr(Control.BrakeFR),
+        brake_bl(Control.BrakeBL),
+        brake_br(Control.BrakeBR) {}
 
     operator FVehicleControl() const {
       FVehicleControl Control;
@@ -81,10 +121,14 @@ namespace rpc {
       Control.bReverse = reverse;
       Control.bManualGearShift = manual_gear_shift;
       Control.Gear = gear;
-      Control.FLWheelSpeed = fl;
-      Control.FRWheelSpeed = fr;
-      Control.BLWheelSpeed = bl;
-      Control.BRWheelSpeed = br;
+      Control.ThrottleFL = throttle_fl;
+      Control.ThrottleFR = throttle_fr;
+      Control.ThrottleBL = throttle_bl;
+      Control.ThrottleBR = throttle_br;
+      Control.BrakeFL = brake_fl;
+      Control.BrakeFR = brake_fr;
+      Control.BrakeBL = brake_bl;
+      Control.BrakeBR = brake_br;
       return Control;
     }
 
@@ -99,10 +143,14 @@ namespace rpc {
           reverse != rhs.reverse ||
           manual_gear_shift != rhs.manual_gear_shift ||
           gear != rhs.gear ||
-          fl != rhs.fl ||
-          fr != rhs.fr ||
-          bl != rhs.bl ||
-          br != rhs.br;
+          throttle_fl != rhs.throttle_fl ||
+          throttle_fr != rhs.throttle_fr ||
+          throttle_bl != rhs.throttle_bl ||
+          throttle_br != rhs.throttle_br ||
+          brake_fl != rhs.brake_fl ||
+          brake_fr != rhs.brake_fr ||
+          brake_bl != rhs.brake_bl ||
+          brake_br != rhs.brake_br;
     }
 
     bool operator==(const VehicleControl &rhs) const {
@@ -117,10 +165,14 @@ namespace rpc {
         reverse,
         manual_gear_shift,
         gear,
-        fl,
-        fr,
-        bl,
-        br);
+        throttle_fl,
+        throttle_fr,
+        throttle_bl,
+        throttle_br,
+        brake_fl,
+        brake_fr,
+        brake_bl,
+        brake_br);
   };
 
 } // namespace rpc

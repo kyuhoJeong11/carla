@@ -31,6 +31,25 @@ struct CARLA_API FVehicleControl
   UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
   bool bManualGearShift = false;
 
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float ThrottleFL = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float ThrottleFR = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float ThrottleBL = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float ThrottleBR = 0.0f;
+
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float BrakeFL = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float BrakeFR = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float BrakeBL = 0.0f;
+  UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite)
+  float BrakeBR = 0.0f;
+
+
   UPROPERTY(Category = "Vehicle Control", EditAnywhere, BlueprintReadWrite, meta = (EditCondition = bManualGearShift))
   int32 Gear = 0;
 };

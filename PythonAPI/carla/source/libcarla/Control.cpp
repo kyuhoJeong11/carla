@@ -28,10 +28,14 @@ namespace rpc {
         << ", reverse=" << boolalpha(control.reverse)
         << ", manual_gear_shift=" << boolalpha(control.manual_gear_shift)
         << ", gear=" << std::to_string(control.gear)
-        << ", fl=" << std::to_string(control.fl)
-        << ", fr=" << std::to_string(control.fr)
-        << ", bl=" << std::to_string(control.bl)
-        << ", br=" << std::to_string(control.br) << ')';
+        << ", throttle_fl=" << std::to_string(control.throttle_fl)
+        << ", throttle_fr=" << std::to_string(control.throttle_fr)
+        << ", throttle_bl=" << std::to_string(control.throttle_bl)
+        << ", throttle_br=" << std::to_string(control.throttle_br)
+        << ", brake_fl=" << std::to_string(control.brake_fl)
+        << ", brake_fr=" << std::to_string(control.brake_fr)
+        << ", brake_bl=" << std::to_string(control.brake_bl)
+        << ", brake_br=" << std::to_string(control.brake_br) << ')';
     return out;
   }
 
@@ -272,18 +276,14 @@ void export_control() {
   namespace cr = carla::rpc;
 
   class_<cr::VehicleControl>("VehicleControl")
-    .def(init<float, float, float, bool, bool, bool, int, float, float, float, float>(
+    .def(init<float, float, float, bool, bool, bool, int>(
       (arg("throttle") = 0.0f,
       arg("steer") = 0.0f,
       arg("brake") = 0.0f,
       arg("hand_brake") = false,
       arg("reverse") = false,
       arg("manual_gear_shift") = false,
-      arg("gear") = 0,
-      arg("fl") = 0.0f,
-      arg("fr") = 0.0f,
-      arg("bl") = 0.0f,
-      arg("br") = 0.0f)))
+      arg("gear") = 0)))
     .def_readwrite("throttle", &cr::VehicleControl::throttle)
     .def_readwrite("steer", &cr::VehicleControl::steer)
     .def_readwrite("brake", &cr::VehicleControl::brake)
@@ -291,10 +291,14 @@ void export_control() {
     .def_readwrite("reverse", &cr::VehicleControl::reverse)
     .def_readwrite("manual_gear_shift", &cr::VehicleControl::manual_gear_shift)
     .def_readwrite("gear", &cr::VehicleControl::gear)
-    .def_readwrite("fl", &cr::VehicleControl::fl)
-    .def_readwrite("fr", &cr::VehicleControl::fr)
-    .def_readwrite("bl", &cr::VehicleControl::bl)
-    .def_readwrite("br", &cr::VehicleControl::br)
+    .def_readwrite("throttle_fl", &cr::VehicleControl::throttle_fl)
+    .def_readwrite("throttle_fr", &cr::VehicleControl::throttle_fr)
+    .def_readwrite("throttle_bl", &cr::VehicleControl::throttle_bl)
+    .def_readwrite("throttle_br", &cr::VehicleControl::throttle_br)
+    .def_readwrite("brake_fl", &cr::VehicleControl::brake_fl)
+    .def_readwrite("brake_fr", &cr::VehicleControl::brake_fr)
+    .def_readwrite("brake_bl", &cr::VehicleControl::brake_bl)
+    .def_readwrite("brake_br", &cr::VehicleControl::brake_br)
     .def("__eq__", &cr::VehicleControl::operator==)
     .def("__ne__", &cr::VehicleControl::operator!=)
     .def(self_ns::str(self_ns::self))
